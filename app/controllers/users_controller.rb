@@ -1,6 +1,17 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  skip_before_action :authenticate, only: [:login, :create]
+  #before_action :set_user, only: [:show, :update, :destroy]
 
+  #POST /login
+  def login
+    credentials = user_credentials
+    token = User.login(credentials[:email], credentials[:password])
+    if token
+      render json: {token: token}
+    else
+      head :unauthorized
+    end
+  end
   # GET /users
   # GET /users.json
   def index
@@ -18,7 +29,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_credentials)
 
     if @user.save
       render json: @user, status: :created, location: @user
@@ -48,6 +59,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def user_credentials
+      params.require(:credentials).permit(:email, :password, :password_confirmation)
+    end
 
     def set_user
       @user = User.find(params[:id])
