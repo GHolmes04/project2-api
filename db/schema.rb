@@ -30,39 +30,26 @@ ActiveRecord::Schema.define(version: 20150804161428) do
   add_index "lesson_plans", ["teachers_id"], name: "index_lesson_plans_on_teachers_id", using: :btree
 
   create_table "schools", force: :cascade do |t|
-    t.string  "name"
-    t.string  "grade_level"
-    t.integer "teacher_id"
-    t.string  "type"
+    t.string   "name"
+    t.string   "grade_level"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.string  "english"
-    t.string  "math"
-    t.string  "science"
-    t.string  "history"
-    t.string  "social_studies"
-    t.string  "foreign_languages"
-    t.string  "technology"
-    t.string  "pe"
-    t.string  "art"
-    t.string  "music"
-    t.string  "other"
-    t.integer "lesson_plan_id"
+    t.string "subject"
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.string   "email"
     t.string   "username"
-    t.integer  "school_id"
     t.integer  "lesson_plan_id"
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "schools_id"
+    t.integer  "school_id"
   end
 
-  add_index "teachers", ["schools_id"], name: "index_teachers_on_schools_id", using: :btree
+  add_index "teachers", ["school_id"], name: "index_teachers_on_school_id", using: :btree
   add_index "teachers", ["user_id"], name: "index_teachers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
