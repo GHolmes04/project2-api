@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804141738) do
+ActiveRecord::Schema.define(version: 20150804161428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,12 @@ ActiveRecord::Schema.define(version: 20150804141738) do
     t.string  "target_grade_level"
     t.integer "teacher_id"
     t.integer "subject_id"
+    t.integer "teachers_id"
+    t.integer "subjects_id"
   end
+
+  add_index "lesson_plans", ["subjects_id"], name: "index_lesson_plans_on_subjects_id", using: :btree
+  add_index "lesson_plans", ["teachers_id"], name: "index_lesson_plans_on_teachers_id", using: :btree
 
   create_table "schools", force: :cascade do |t|
     t.string  "name"
@@ -54,8 +59,10 @@ ActiveRecord::Schema.define(version: 20150804141738) do
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "schools_id"
   end
 
+  add_index "teachers", ["schools_id"], name: "index_teachers_on_schools_id", using: :btree
   add_index "teachers", ["user_id"], name: "index_teachers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -69,5 +76,8 @@ ActiveRecord::Schema.define(version: 20150804141738) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
+  add_foreign_key "lesson_plans", "subjects"
+  add_foreign_key "lesson_plans", "teachers"
+  add_foreign_key "teachers", "schools"
   add_foreign_key "teachers", "users"
 end
