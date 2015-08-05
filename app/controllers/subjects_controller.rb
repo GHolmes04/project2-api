@@ -1,10 +1,17 @@
-class PeopleController < ApplicationController
+class SubjectsController< ApplicationController
+
   def index
-    render json: Subject.all
+    subject = Subject.all
+
+    render json: subject
   end
 
+  # GET /users/1
+  # GET /users/1.json
   def show
-    render json: Subject.find(params[:id])
+    subject= Subject.find(params[:id])
+
+    render json: subject
   end
 
 

@@ -1,14 +1,14 @@
-class Lesson_PlansController < ApplicationController
+class LessonPlansController < ApplicationController
   def index
-    render json: Lesson_plan.all
+    render json: LessonPlan.all
   end
 
   def show
-    render json: Lesson_plan.find(params[:id])
+    render json: LessonPlan.find(params[:id])
   end
 
   def create
-    lesson_plan = Lesson_plan.create(lesson_plan_params)
+    lesson_plan = LessonPlan.create(lesson_plan_params)
     if lesson_plan.save
       head :created, location: lesson_plan
     else
@@ -17,7 +17,7 @@ class Lesson_PlansController < ApplicationController
   end
 
   def update
-    lesson_plan = Lesson_plan.find(params[:id])
+    lesson_plan = LessonPlan.find(params[:id])
     if lesson_plan.update(lesson_plan_params)
       lesson_plan.save
       render json: lesson_plan
@@ -27,7 +27,7 @@ class Lesson_PlansController < ApplicationController
   end
 
   def destroy
-    lesson_plan = Lesson_plan.find(params[:id])
+    lesson_plan = LessonPlan.find(params[:id])
     lesson_plan.destroy
   end
 
