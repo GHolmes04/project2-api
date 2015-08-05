@@ -1,4 +1,4 @@
-class TeacherController < ApplicationController
+class TeachersController < ApplicationController
   def index
     render json: Teacher.all
   end
@@ -33,6 +33,6 @@ class TeacherController < ApplicationController
 
   private
   def teacher_params
-    params.require(:teacher).permit(:id, :username, :lesson_plan_id :school_id)
+    params.require(:teacher).permit(:id, :username, :lesson_plan_id, :school_id)
   end
 end

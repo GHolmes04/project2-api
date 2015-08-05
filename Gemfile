@@ -17,6 +17,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'active_model_serializers'
 
+
+gem 'byebug'
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
