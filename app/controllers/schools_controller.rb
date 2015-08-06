@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+
   def index
     render json: School.all
   end
@@ -10,7 +11,7 @@ class SchoolsController < ApplicationController
   def create
     school = School.create(school_params)
     if school.save
-      head :created, location: school
+      render json: school, status: :created
     else
       render json: school.errors, status: :unprocessable_entity
     end
@@ -29,10 +30,11 @@ class SchoolsController < ApplicationController
   def destroy
     school = School.find(params[:id])
     school.destroy
+    head :ok
   end
 
   private
   def school_params
-    params.require(:school).permit(:id, :name, :grade_level, :teacher_id)
+    params.require(:school).permit(:name, :grade_level)
   end
 end

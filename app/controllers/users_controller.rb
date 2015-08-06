@@ -14,6 +14,8 @@ class UsersController < ApplicationController
       head :unauthorized
     end
   end
+
+
   # GET /users
   # GET /users.json
   def index
@@ -47,8 +49,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if @user.update(user_params)
-      head :no_content
+    if @user.update(user_credentials)
+      render json: @user, status: :accepted
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -70,9 +72,5 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end

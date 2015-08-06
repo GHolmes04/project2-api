@@ -3,7 +3,7 @@ class SubjectsController< ApplicationController
   def index
     subject = Subject.all
 
-    render json: subject
+    render json: subject ## render json: Subject.all
   end
 
   # GET /users/1
@@ -17,6 +17,6 @@ class SubjectsController< ApplicationController
 
   private
   def subject_params
-    params.require(:subject).permit(:id, :subject, :lesson_plan_id)
+    params.require(:subject).permit(:id, :subject)
   end
 end

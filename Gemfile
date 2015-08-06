@@ -20,6 +20,8 @@ gem 'active_model_serializers'
 
 gem 'byebug'
 
+gem 'hirb'
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

@@ -1,4 +1,5 @@
 class TeachersController < ApplicationController
+
   def index
     render json: Teacher.all
   end
@@ -8,9 +9,10 @@ class TeachersController < ApplicationController
   end
 
   def create
-    teacher = Teacher.create(teacher_params)
+    teacher = Teacher.new(teacher_params)
+    # teacher.user = current_user
     if teacher.save
-      head :created, location: teacher
+      render json: teacher, status: :created
     else
       render json: teacher.errors, status: :unprocessable_entity
     end
@@ -19,7 +21,6 @@ class TeachersController < ApplicationController
   def update
     teacher = Teacher.find(params[:id])
     if teacher.update(teacher_params)
-      teacher.save
       render json: teacher
     else
       render json: teacher.errors, status: :unprocessable_entity
@@ -29,10 +30,12 @@ class TeachersController < ApplicationController
   def destroy
     teacher = Teacher.find(params[:id])
     teacher.destroy
+    head :ok
   end
 
   private
-  def teacher_params
-    params.require(:teacher).permit(:id, :username, :lesson_plan_id, :school_id)
+    def teacher_params
+    params.require(:teacher).permit(:username, :school_id, :user_id)
+    end
   end
-end
+

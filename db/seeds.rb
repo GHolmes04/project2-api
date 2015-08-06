@@ -15,7 +15,7 @@ end
 
     School.create!(name: "General Assembly", grade_level: "Post Grad")
 
-    Teacher.create!(username: 'greggy', school_id: 1, user_id: 1, lesson_plan_id: 1)
+    Teacher.create!(username: 'greggy', school_id: 1, user_id: 1)
 
     LessonPlan.create!(title: 'AJAX 101', content: 'Look at this amazing lesson plan', target_grade_level: '7th', teacher_id: 1, subject_id: 1)
 

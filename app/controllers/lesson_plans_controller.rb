@@ -29,10 +29,11 @@ class LessonPlansController < ApplicationController
   def destroy
     lesson_plan = LessonPlan.find(params[:id])
     lesson_plan.destroy
+    head :ok
   end
 
   private
   def lesson_plan_params
-    params.require(:credentails).permit(:id, :title, :target_grade_level, :teacher_id, :subject_id)
+    params.require(:lesson_plan).permit(:title, :target_grade_level, :teacher_id, :subject_id)
   end
 end

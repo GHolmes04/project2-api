@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804161428) do
+ActiveRecord::Schema.define(version: 20150806173334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,10 @@ ActiveRecord::Schema.define(version: 20150804161428) do
     t.string  "target_grade_level"
     t.integer "teacher_id"
     t.integer "subject_id"
-    t.integer "teachers_id"
-    t.integer "subjects_id"
   end
 
-  add_index "lesson_plans", ["subjects_id"], name: "index_lesson_plans_on_subjects_id", using: :btree
-  add_index "lesson_plans", ["teachers_id"], name: "index_lesson_plans_on_teachers_id", using: :btree
+  add_index "lesson_plans", ["subject_id"], name: "index_lesson_plans_on_subject_id", using: :btree
+  add_index "lesson_plans", ["teacher_id"], name: "index_lesson_plans_on_teacher_id", using: :btree
 
   create_table "schools", force: :cascade do |t|
     t.string   "name"
@@ -42,11 +40,10 @@ ActiveRecord::Schema.define(version: 20150804161428) do
 
   create_table "teachers", force: :cascade do |t|
     t.string   "username"
-    t.integer  "lesson_plan_id"
-    t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "school_id"
+    t.integer  "user_id"
   end
 
   add_index "teachers", ["school_id"], name: "index_teachers_on_school_id", using: :btree

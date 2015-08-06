@@ -4,8 +4,6 @@ class CreateLessonPlan < ActiveRecord::Migration
       t.string :title
       t.string :content
       t.string :target_grade_level
-      t.integer :teacher_id
-      t.integer :subject_id
     end
   end
 end
