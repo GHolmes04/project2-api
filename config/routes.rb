@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
 
   resources :lesson_plans, except: [:new, :edit]
+
+  resources :subjects, except: [:new, :edit]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
